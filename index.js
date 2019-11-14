@@ -6,7 +6,7 @@ const argv = require('yargs').argv
 const prettyPrint = require('./src/commit-prettier/commit-prettier');
 // Check Last commit
 if (argv.checkCommit) {
-    const numberOfCommitToCheck = argv.last || 3;
+    const numberOfCommitToCheck = argv.last || 1;
 
     for (var i = 1; i <= numberOfCommitToCheck; i++) {
         const commitMessage = shortCut.messageLastCommit(i);
