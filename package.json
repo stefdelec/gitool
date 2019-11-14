@@ -10,6 +10,10 @@
   "bin": {
     "gitool": "index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stefdelec/gitool"
+  },
   "access": "public",
   "keywords": [],
   "author": "",
