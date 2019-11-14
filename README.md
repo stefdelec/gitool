@@ -11,4 +11,11 @@ For last 3
 
 ## pretty print
 
-```gittool --prettyPrint```
+```gitool --prettyPrint```
+
+
+## message composer
+
+```gitool --messageComposer --test``` to test the functionality
+
+```gitool --messageComposer``` to make a real commit

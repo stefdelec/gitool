@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const commitMessageChercher = require('./src/commit-message-checker/commit-message-checker')
 const shortCut = require('./src/gitShortCut');
+const messageComposer = require('./src/message-composer/message-composer')
 const chalk = require('chalk');
 const argv = require('yargs').argv
 const prettyPrint = require('./src/commit-prettier/commit-prettier');
@@ -34,4 +35,12 @@ if (argv.checkCommit) {
 if (argv.prettyPrint) {
     const commit = argv.hash || shortCut.firstCommitAllTime().trim();
     prettyPrint(commit);
+}
+
+if (argv.messageComposer) {
+    const isTest = argv.test || false;
+    if(isTest){
+        console.log("exectued as test. No commit will be executed");
+    }
+    messageComposer(isTest);
 }

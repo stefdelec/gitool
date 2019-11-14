@@ -17,16 +17,14 @@ describe('commit message checker', () => {
     })
 
 
-
-    it("should NOT accept", () => {
-        const notAcceptedCommit =
-            [
-                'feat(example) : my example',
-                'fix(example):my example',
-                'fixe: my example'
-            ]
-
-        notAcceptedCommit.forEach(commitMessage => {
+    const notAcceptedCommit =
+    [
+        'feat(example) : my example',
+        'fix(example):my example',
+        'fixe: my example'
+    ]
+    notAcceptedCommit.forEach(commitMessage => {
+        it(`should NOT accept "${commitMessage}"`, () => {
             expect(commitMessageChecker(commitMessage)).toBeFalsy()
         })
     })

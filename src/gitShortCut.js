@@ -14,5 +14,6 @@ module.exports = {
     messageLastCommit,
     allCommitSince,
     firstCommitAllTime,
-    hashLastCommit
+    hashLastCommit,
+    ex
 };
