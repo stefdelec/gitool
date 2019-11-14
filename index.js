@@ -3,9 +3,17 @@ const commitMessageChercher = require('./src/commit-message-checker/commit-messa
 const shortCut = require('./src/gitShortCut');
 const messageComposer = require('./src/message-composer/message-composer')
 const chalk = require('chalk');
-const argv = require('yargs').argv
+const argv = require('yargs')
+    .alias('c','checkCommit')
+    .alias('p','prettyPrint')
+    .alias('m','messageComposer')
+    .alias('t','test')
+    .alias('l','last')
+    .argv
+
 const prettyPrint = require('./src/commit-prettier/commit-prettier');
 // Check Last commit
+
 if (argv.checkCommit) {
     const numberOfCommitToCheck = argv.last || 1;
 
@@ -39,7 +47,7 @@ if (argv.prettyPrint) {
 
 if (argv.messageComposer) {
     const isTest = argv.test || false;
-    if(isTest){
+    if (isTest) {
         console.log("exectued as test. No commit will be executed");
     }
     messageComposer(isTest);
