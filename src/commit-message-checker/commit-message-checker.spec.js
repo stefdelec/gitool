@@ -11,7 +11,7 @@ describe('commit message checker', () => {
         ]
 
     acceptedCommit.forEach(commitMessage => {
-        it(`should accept ${commitMessage}`, () => {
+        it(`should accept "${commitMessage}"`, () => {
             expect(commitMessageChecker(commitMessage)).toBeTruthy()
         })
     })

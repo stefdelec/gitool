@@ -1,15 +1,22 @@
 {
-  "name": "git-log-tools",
+  "name": "git-tool",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepublish": "npm test"
   },
+  "bin": {
+    "gitTool": "index.js"
+  },
+  "access": "public",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jest": "^24.9.0"
+    "chalk": "^3.0.0",
+    "jest": "^24.9.0",
+    "yargs": "^14.2.0"
   }
 }
