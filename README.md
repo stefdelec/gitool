@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/stefdelec/gitool.svg?branch=master)](https://travis-ci.org/stefdelec/gitool)
+[![npm version](https://img.shields.io/npm/v/gitool.svg?style=flat)](https://www.npmjs.com/package/gitool)
+
 # gitool
 
 Gitool helps you always have the right format for your commit message.

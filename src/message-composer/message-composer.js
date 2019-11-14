@@ -80,25 +80,25 @@ getMessage = async () => {
     return response.message;
 }
 const messageComposer = async (test = false) => {
-    let type, scope, message;
+    let type, scope, message = false;
 
     type = await getType();
     console.log(`type will be ${type}`);
 
     scope = await getScope();
     console.log(`scope will be ${scope}`)
-
+    
     message = await getMessage();
     console.log(`message will be ${message}`)
 
     const constructedScope = scope ? `(${scope})` : '';
     const commitMessage = `${type}${constructedScope}: ${message}`;
-    
+
     console.log(`commit message:  < ${commitMessage} >`);
 
     const command = `git commit -am "${commitMessage}"`;
-    if (!test && type && message) {
-        shortCut.ex(`git commit -am "${command}"`)
+    if (!test) {
+        shortCut.ex(command)
     }
 }
 
