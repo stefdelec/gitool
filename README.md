@@ -1,5 +1,8 @@
 # gitool
 
+Gitool helps you always have the right format for your commit message.
+Following https://www.conventionalcommits.org/en/v1.0.0-beta.2/
+
 ## check commit format
 
 For last one:
