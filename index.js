@@ -6,6 +6,7 @@ const chalk = require('chalk');
 const argv = require('yargs')
     .alias('c','checkCommit')
     .alias('p','prettyPrint')
+    .alias('a','addAll')
     .alias('m','messageComposer')
     .alias('t','test')
     .alias('l','last')
@@ -45,15 +46,14 @@ if (argv.prettyPrint) {
     prettyPrint(commit);
 }
 
-if(argv.myTest){
-    const command = `git commit -am "ezofjezofjzeoifj"`;
-    shortCut.ex( `git commit -am "ezofjezofjzeoifj"`)
-}
-
 if (argv.messageComposer) {
     const isTest = argv.test || false;
     if (isTest) {
         console.log("exectued as test. No commit will be executed");
     }
-    messageComposer(isTest);
+    if(argv.addAll){
+        messageComposer(isTest,true);
+    }else{
+        messageComposer(isTest,false);
+    }
 }

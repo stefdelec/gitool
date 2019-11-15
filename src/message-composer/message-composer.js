@@ -79,7 +79,7 @@ getMessage = async () => {
 
     return response.message;
 }
-const messageComposer = async (test = false) => {
+const messageComposer = async (test = false, addAll=false) => {
     let type, scope, message;
 
     type = await getType();
@@ -97,7 +97,12 @@ const messageComposer = async (test = false) => {
     console.log(`commit message:  < ${commitMessage} >`);
 
     const command = `git commit -m "${commitMessage}"`;
+
+
     if (!test && type && message) {
+        if(addAll){
+            ex('git add .')
+        }
         shortCut.ex(command)
     }
 }
