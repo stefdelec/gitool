@@ -101,7 +101,7 @@ const messageComposer = async (test = false, addAll=false) => {
 
     if (!test && type && message) {
         if(addAll){
-            ex('git add .')
+            shortCut.ex('git add .')
         }
         shortCut.ex(command)
     }
