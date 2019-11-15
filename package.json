@@ -8,7 +8,8 @@
     "prepublish": "npm test"
   },
   "bin": {
-    "gitool": "index.js"
+    "gitool": "index.js",
+    "gt": "index.js"
   },
   "repository": {
     "type": "git",
