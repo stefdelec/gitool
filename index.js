@@ -10,6 +10,7 @@ const argv = require('yargs')
     .alias('m','messageComposer')
     .alias('t','test')
     .alias('l','last')
+    .alias('g','groupBy')
     .argv
 
 const prettyPrint = require('./src/commit-prettier/commit-prettier');
@@ -42,8 +43,10 @@ if (argv.checkCommit) {
 
 
 if (argv.prettyPrint) {
+    const groupBy=argv.groupBy==='scope'?'scope':'type';
+
     const commit = argv.hash || shortCut.firstCommitAllTime().trim();
-    prettyPrint(commit);
+    prettyPrint(commit,groupBy);
 }
 
 if (argv.messageComposer) {

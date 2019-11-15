@@ -20,7 +20,14 @@ or ```gitool -cl=3```
 ## pretty print
 
 ```gitool --prettyPrint```
-```gitool -p```
+```gitool -p``` (groupBy type by default)
+
+```gitool -p groupBy='type'```
+
+```gitool -pg='type'```
+```gitool -pg='scope'```
+
+
 
 
 ## message composer
