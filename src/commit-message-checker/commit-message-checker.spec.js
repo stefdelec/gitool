@@ -7,7 +7,9 @@ describe('commit message checker', () => {
             'feat(example): my example',
             'fix(example): my example',
             'fix: my example',
-            'chore: zefe'
+            'chore: zefe',
+            '2.0.1',
+            '02.02.001',
         ]
 
     acceptedCommit.forEach(commitMessage => {

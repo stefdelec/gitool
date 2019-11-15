@@ -45,6 +45,11 @@ if (argv.prettyPrint) {
     prettyPrint(commit);
 }
 
+if(argv.myTest){
+    const command = `git commit -am "ezofjezofjzeoifj"`;
+    shortCut.ex( `git commit -am "ezofjezofjzeoifj"`)
+}
+
 if (argv.messageComposer) {
     const isTest = argv.test || false;
     if (isTest) {
