@@ -96,7 +96,7 @@ const messageComposer = async (test = false) => {
 
     console.log(`commit message:  < ${commitMessage} >`);
 
-    const command = `git commit -am "${commitMessage}"`;
+    const command = `git commit -m "${commitMessage}"`;
     if (!test) {
         shortCut.ex(command)
     }
