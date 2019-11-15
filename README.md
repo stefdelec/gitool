@@ -6,6 +6,9 @@
 Gitool helps you always have the right format for your commit message.
 Following https://www.conventionalcommits.org/en/v1.0.0-beta.2/
 
+## alias
+any gitool command can be called with ```gitool``` or ```gt```
+
 ## check commit format
 
 For last one:
