@@ -20,6 +20,8 @@ or ```gitool -c -l=3```
 or ```gitool -cl=3```
 
 
+![alt text](https://raw.githubusercontent.com/stefdelec/gitool/master/readme/commitchecker.png)
+
 ## pretty print
 
 ```gitool --prettyPrint```
@@ -30,11 +32,15 @@ or ```gitool -cl=3```
 ```gitool -pg='type'```
 ```gitool -pg='scope'```
 
+![alt text](https://raw.githubusercontent.com/stefdelec/gitool/master/readme/commitprettier.png)
+
+
 Output a file:
 
 ```gitool -po=releaseNote.md'```
 
 ```gitool -p --output=releaseNote.md'```
+[example of this repo here](../releasenote.md)
 
 ## message composer
 
@@ -46,3 +52,4 @@ and
 ```gitool --m``` to make a real commit
 
 
+![alt text](https://raw.githubusercontent.com/stefdelec/gitool/master/readme/messagecomposer.png)
