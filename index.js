@@ -3,17 +3,19 @@ const commitMessageChercher = require('./src/commit-message-checker/commit-messa
 const shortCut = require('./src/gitShortCut');
 const messageComposer = require('./src/message-composer/message-composer')
 const chalk = require('chalk');
+
 const argv = require('yargs')
-    .alias('c','checkCommit')
-    .alias('p','prettyPrint')
-    .alias('a','addAll')
-    .alias('m','messageComposer')
-    .alias('t','test')
-    .alias('l','last')
-    .alias('g','groupBy')
+    .alias('c', 'checkCommit')
+    .alias('o', 'output')
+    .alias('p', 'prettyPrint')
+    .alias('a', 'addAll')
+    .alias('m', 'messageComposer')
+    .alias('t', 'test')
+    .alias('l', 'last')
+    .alias('g', 'groupBy')
     .argv
 
-const prettyPrint = require('./src/commit-prettier/commit-prettier');
+const { prettyPrint, write } = require('./src/commit-prettier/commit-prettier');
 // Check Last commit
 
 if (argv.checkCommit) {
@@ -41,12 +43,11 @@ if (argv.checkCommit) {
 
 }
 
-
 if (argv.prettyPrint) {
-    const groupBy=argv.groupBy==='scope'?'scope':'type';
+    const groupBy = argv.groupBy === 'scope' ? 'scope' : 'type';
 
     const commit = argv.hash || shortCut.firstCommitAllTime().trim();
-    prettyPrint(commit,groupBy);
+    prettyPrint(commit, groupBy,argv.output);
 }
 
 if (argv.messageComposer) {
@@ -54,9 +55,9 @@ if (argv.messageComposer) {
     if (isTest) {
         console.log("exectued as test. No commit will be executed");
     }
-    if(argv.addAll){
-        messageComposer(isTest,true);
-    }else{
-        messageComposer(isTest,false);
+    if (argv.addAll) {
+        messageComposer(isTest, true);
+    } else {
+        messageComposer(isTest, false);
     }
 }

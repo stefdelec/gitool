@@ -1,0 +1,18 @@
+#  Release notes
+
+**hash**: {{hash}}
+**date**: {{date}}
+
+{{#sections}}
+## **{{name}} ({{length}}):**
+{{#content}}
+ - {{.}}
+{{/content}}
+
+{{/sections}}
+
+
+
+
+
+

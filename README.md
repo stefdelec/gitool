@@ -30,8 +30,11 @@ or ```gitool -cl=3```
 ```gitool -pg='type'```
 ```gitool -pg='scope'```
 
+Output a file:
 
+```gitool -po=releaseNote.md'```
 
+```gitool -p --output=releaseNote.md'```
 
 ## message composer
 

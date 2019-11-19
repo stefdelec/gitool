@@ -1,74 +1,96 @@
-const { execSync } = require('child_process')
 const { allCommitSince, dateOfCommit } = require('../gitShortCut');
 const { types } = require('../configuration');
-const chalk = require("chalk");
- const {commitExtractor} = require('../commit-extractor/commit-extractor');
+const { commitExtractor } = require('../commit-extractor/commit-extractor');
+const Mustache = require('mustache');
+const { readFileSync, writeFileSync } = require("fs");
 
- const addToAcc = (acc, commitType, value) => {
+const addToAcc = (acc, commitType, value) => {
     if (!acc[commitType]) {
-        acc[commitType] = []
+        acc[commitType] = {}
+        acc[commitType].content = [];
+        acc[commitType].length = 0;
+        acc[commitType].name = commitType;
+
     }
-    acc[commitType].push(value);
+    acc[commitType].content.push(value);
+    acc[commitType].length = acc[commitType].content.length;
     return acc;
 }
 
-const getArrayofCommit = (commitLogs) =>  commitLogs.split('\n');
+const getArrayofCommit = (commitLogs) => commitLogs.split('\n');
 
-const groupByScope=(commitLogs)=>{
-    const commits=getArrayofCommit(commitLogs);
+const groupByScope = (commitLogs) => {
+    const commits = getArrayofCommit(commitLogs);
 
     return commits.reduce((acc, commit) => {
 
-    const extractedCommit=commitExtractor(commit);
+        const extractedCommit = commitExtractor(commit);
 
-    if(extractedCommit && extractedCommit.scope){
-        acc = addToAcc(acc, extractedCommit.scope, commit);
-    }
+        if (extractedCommit && extractedCommit.scope) {
+            acc = addToAcc(acc, extractedCommit.scope, commit);
+        }
         return acc;
     }, {})
 }
 
-const groupByType=(commitLogs)=>{
+const groupByType = (commitLogs) => {
 
-    const commits=getArrayofCommit(commitLogs);
+    const commits = getArrayofCommit(commitLogs);
 
     return commits.reduce((acc, commit) => {
 
-    const extractedCommit=commitExtractor(commit);
-    if(extractedCommit && types.includes(extractedCommit.type)){
-        acc = addToAcc(acc, extractedCommit.type, commit);
-    }
+        const extractedCommit = commitExtractor(commit);
+        if (extractedCommit && types.includes(extractedCommit.type)) {
+            acc = addToAcc(acc, extractedCommit.type, commit);
+        }
         return acc;
     }, {})
 
 }
-const prettyPrint = (commitHash,groupBy) => {
+const groupCommits = (commitHash, groupBy) => {
     const commitsLog = allCommitSince(commitHash);
-    const theDate = dateOfCommit(commitHash)
     let groupedCommit
-    if(groupBy==='type'){
-            groupedCommit = groupByType(commitsLog);
-    }else if(groupBy==='scope'){
+    if (groupBy === 'type') {
+        groupedCommit = groupByType(commitsLog);
+    } else if (groupBy === 'scope') {
         groupedCommit = groupByScope(commitsLog);
 
     }
+    return groupedCommit;
+}
+const write = (view) => {
 
-    console.log(groupedCommit)
-    console.log(chalk.greenBright(`Since: ${theDate}`))
-    console.log(chalk.green(`commit hash ${commitHash}`))
-    console.log('')
-    Object.keys(groupedCommit)
-        .forEach(type => {
-            const num = groupedCommit[type].length;
-            const commits = groupedCommit[type];
+    const template = readFileSync(__dirname + '/template.file.txt').toString();
 
-            console.log(chalk.bgGray.bold.white(`###     ${num} ${type}     ###`));
-            commits.forEach(commit =>
+    const output = Mustache.render(template, view);
+    eval(output);
 
-                console.log(chalk.grey(commit))
-            );
-            console.log('')
-        })
+}
+const prettyPrint = (commitHash, groupBy, path) => {
+    const groupedCommit = groupCommits(commitHash, groupBy);
+    const theDate = dateOfCommit(commitHash)
+
+    const data =
+    {
+        hash: commitHash,
+        date: theDate,
+        sections: Object.keys(groupedCommit).map(key => groupedCommit[key])
+    }
+
+    const template = readFileSync(__dirname + '/template.terminal.txt').toString();
+    const fileTemplate = readFileSync(__dirname + '/template.file.txt').toString();
+
+
+    const consoleLogs = Mustache.render(template, data);
+
+    const file = Mustache.render(fileTemplate, data);
+
+    eval(consoleLogs);
+
+    if (path) {
+        console.log('Writing release not at: ', path);
+        writeFileSync(path, file);
+    }
 }
 
-module.exports = prettyPrint;
+module.exports = { prettyPrint, write };
