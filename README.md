@@ -34,6 +34,7 @@ or ```gitool -cl=3```
 
 ![alt text](https://raw.githubusercontent.com/stefdelec/gitool/master/readme/commitprettier.png)
 
+```gitool -p --tag``` output commits from last tag
 
 Output a file:
 

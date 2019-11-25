@@ -1,8 +1,7 @@
 var chalk = require('chalk');
 
-console.log(chalk.bold.blue('hash: {{hash}}'));
-console.log(chalk.bold.blue('date: {{date}}'));
-
+console.log(chalk.bold.blue('title: {{title}}'));
+console.log('')
 {{#sections}}
 console.log(chalk.green('##########################'))
 console.log(chalk.bold.green('### {{name}} ({{length}})'))

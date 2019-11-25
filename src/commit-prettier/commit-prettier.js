@@ -21,7 +21,6 @@ const getArrayofCommit = (commitLogs) => commitLogs.split('\n');
 
 const groupByScope = (commitLogs) => {
     const commits = getArrayofCommit(commitLogs);
-
     return commits.reduce((acc, commit) => {
 
         const extractedCommit = commitExtractor(commit);
@@ -36,7 +35,6 @@ const groupByScope = (commitLogs) => {
 const groupByType = (commitLogs) => {
 
     const commits = getArrayofCommit(commitLogs);
-
     return commits.reduce((acc, commit) => {
 
         const extractedCommit = commitExtractor(commit);
@@ -68,12 +66,10 @@ const write = (view) => {
 }
 const prettyPrint = (commitHash, groupBy, path) => {
     const groupedCommit = groupCommits(commitHash, groupBy);
-    const theDate = dateOfCommit(commitHash)
 
     const data =
     {
-        hash: commitHash,
-        date: theDate,
+        title: commitHash,
         sections: Object.keys(groupedCommit).map(key => groupedCommit[key])
     }
 

@@ -46,8 +46,11 @@ if (argv.checkCommit) {
 if (argv.prettyPrint) {
     const groupBy = argv.groupBy === 'scope' ? 'scope' : 'type';
 
-    const commit = argv.hash || shortCut.firstCommitAllTime().trim();
-    prettyPrint(commit, groupBy,argv.output);
+    const commitFrom = argv.tag ? shortCut.lastTag().trim() : shortCut.firstCommitAllTime().trim();
+
+    const commit = argv.hash || commitFrom;
+
+    prettyPrint(commit, groupBy, argv.output);
 }
 
 if (argv.messageComposer) {

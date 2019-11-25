@@ -1,7 +1,6 @@
 #  Release notes
 
-**hash**: {{hash}}
-**date**: {{date}}
+**title**: {{title}}
 
 {{#sections}}
 ## **{{name}} ({{length}}):**
