@@ -1,6 +1,6 @@
 var chalk = require('chalk');
 
-console.log(chalk.bold.blue('title: {{title}}'));
+console.log(chalk.bold.blue('version: {{title}}'));
 console.log('')
 {{#sections}}
 console.log(chalk.green('##########################'))

@@ -38,9 +38,9 @@ or ```gitool -cl=3```
 
 Output a file:
 
-```gitool -po=releaseNote.md'```
+```gitool -po=releasechangelogNote.md'```
 
-```gitool -p --output=releaseNote.md'```
+```gitool -p --output=changelog.md'```
 [example of this repo here](../releasenote.md)
 
 ## message composer
