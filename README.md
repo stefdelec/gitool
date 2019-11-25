@@ -41,7 +41,7 @@ Output a file:
 ```gitool -po=releasechangelogNote.md'```
 
 ```gitool -p --output=changelog.md'```
-[example of this repo here](../releasenote.md)
+[example of this repo here](../changelog.md)
 
 ## message composer
 
