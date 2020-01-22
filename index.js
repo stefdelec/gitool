@@ -64,3 +64,12 @@ if (argv.messageComposer) {
         messageComposer(isTest, false);
     }
 }
+
+if(argv.changelog){
+    console.log("Bumping: start");
+    console.log("Creating: changelog.md");
+
+    shortCut.ex('gitool -p --tag --output=changelog.md');
+    shortCut.ex('git add .')
+    shortCut.ex('git commit -am "docs: changelog"');
+}
