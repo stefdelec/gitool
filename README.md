@@ -32,6 +32,9 @@ or ```gitool -cl=3```
 ```gitool -pg='type'```
 ```gitool -pg='scope'```
 
+```gitool -pg='scope' --tag=3```
+
+
 ![alt text](https://raw.githubusercontent.com/stefdelec/gitool/master/readme/commitprettier.png)
 
 ```gitool -p --tag``` output commits from last tag

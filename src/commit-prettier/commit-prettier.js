@@ -1,4 +1,4 @@
-const { allCommitSince, dateOfCommit } = require('../gitShortCut');
+const { allCommitSince } = require('../gitShortCut');
 const { types } = require('../configuration');
 const { commitExtractor } = require('../commit-extractor/commit-extractor');
 const Mustache = require('mustache');
@@ -64,12 +64,12 @@ const write = (view) => {
     eval(output);
 
 }
-const prettyPrint = (commitHash, groupBy, path) => {
+const prettyPrint = (commitHash, groupBy, path,title='untitled') => {
     const groupedCommit = groupCommits(commitHash, groupBy);
 
     const data =
     {
-        title: commitHash,
+        title,
         sections: Object.keys(groupedCommit).map(key => groupedCommit[key])
     }
 

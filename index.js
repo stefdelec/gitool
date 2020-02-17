@@ -46,11 +46,17 @@ if (argv.checkCommit) {
 if (argv.prettyPrint) {
     const groupBy = argv.groupBy === 'scope' ? 'scope' : 'type';
 
-    const commitFrom = argv.tag ? shortCut.lastTag().trim() : shortCut.firstCommitAllTime().trim();
+    const firstCommitAllTime = shortCut.firstCommitAllTime().trim()
+    const tags = shortCut.getTagsOrderedByDate().split('\n').reverse();
 
-    const commit = argv.hash || commitFrom;
+    const getFromTag = () => argv.tag === true ? tags[1] : tags[+argv.tag];
 
-    prettyPrint(commit, groupBy, argv.output);
+    const commitFrom = argv.tag ? getFromTag() : shortCut.firstCommitAllTime().trim();
+
+    // one because tag is set before
+    const title = tags[1];
+
+    prettyPrint(commitFrom, groupBy, argv.output, title);
 }
 
 if (argv.messageComposer) {
@@ -65,7 +71,7 @@ if (argv.messageComposer) {
     }
 }
 
-if(argv.changelog){
+if (argv.changelog) {
     console.log("Bumping: start");
     console.log("Creating: changelog.md");
 
