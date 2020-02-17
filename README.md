@@ -34,6 +34,8 @@ or ```gitool -cl=3```
 
 ```gitool -pg='scope' --tag=3```
 
+```gitool -pg='type' --tag=3 --filters='feat|fix'```
+
 
 ![alt text](https://raw.githubusercontent.com/stefdelec/gitool/master/readme/commitprettier.png)
 

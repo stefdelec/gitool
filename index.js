@@ -56,7 +56,8 @@ if (argv.prettyPrint) {
     // one because tag is set before
     const title = tags[1];
 
-    prettyPrint(commitFrom, groupBy, argv.output, title);
+    const filters = argv.filters ? argv.filters.split('|') : undefined;
+    prettyPrint(commitFrom, groupBy, argv.output, title, filters);
 }
 
 if (argv.messageComposer) {
