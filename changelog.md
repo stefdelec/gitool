@@ -1,12 +1,9 @@
 #  Release notes
 
-**version**: From v1.16.0 to v1.17.0
-
-## **docs (1):**
- - docs: changelog
+**version**: v1.17.0
 
 ## **feat (1):**
- - feat(changelog): changelog only on last tag
+ - feat(changelog): improve changelog title
 
 
 
