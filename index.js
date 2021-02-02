@@ -52,11 +52,13 @@ if (argv.prettyPrint) {
     const firstCommitAllTime = shortCut.firstCommitAllTime().trim()
     const tags = shortCut.getTagsOrderedByDate().split('\n').reverse();
 
-    const getFromTag = () => argv.tag === true ? tags[0] : tags[+argv.tag];
+    const numOftag=parseInt(argv.tag>tags.length?tags.length-1 : argv.tag);
 
-    const commitFrom = argv.tag ? getFromTag() : shortCut.firstCommitAllTime().trim();
+    const getFromTag = (tagNumber) => tags[+tagNumber];
 
-    const title = `${tags[0]}`;
+    const commitFrom = argv.tag ? getFromTag(numOftag) : shortCut.firstCommitAllTime().trim();
+
+    let title = `From ${getFromTag(numOftag)} to ${tags[0]}`;
 
     const filters = argv.filters ? argv.filters.split('|') : undefined;
     prettyPrint(commitFrom, groupBy, argv.output, title, filters);
