@@ -1,4 +1,4 @@
-const { allCommitSince } = require('../gitShortCut');
+const { allCommitSince ,gitAddAll } = require('../gitShortCut');
 const { types } = require('../configuration');
 const { commitExtractor } = require('../commit-extractor/commit-extractor');
 const Mustache = require('mustache');
@@ -91,6 +91,7 @@ const prettyPrint = (commitHash, groupBy, path, title = 'untitled', filters) => 
     if (path) {
         console.log('Writing changelog at: ', path);
         writeFileSync(path, file);
+        gitAddAll()
     }
 }
 
