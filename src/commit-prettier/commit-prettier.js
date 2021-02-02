@@ -51,7 +51,7 @@ const groupByType = (commitLogs, filters) => {
 }
 const groupCommits = (commitHash, groupBy,filters) => {
     const commitsLog = allCommitSince(commitHash);
-    console.log(commitsLog)
+
     let groupedCommit
     if (groupBy === 'type') {
         groupedCommit = groupByType(commitsLog, filters);

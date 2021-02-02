@@ -56,7 +56,7 @@ if (argv.prettyPrint) {
 
     const commitFrom = argv.tag ? getFromTag() : shortCut.firstCommitAllTime().trim();
 
-    const title = tags[0];
+    const title = `${tags[0]}`;
 
     const filters = argv.filters ? argv.filters.split('|') : undefined;
     prettyPrint(commitFrom, groupBy, argv.output, title, filters);
