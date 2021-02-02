@@ -1,6 +1,6 @@
 #  Release notes
 
-**version**: v1.6.0
+**version**: v1.15.0
 
 ## **docs (10):**
  - docs: changelog

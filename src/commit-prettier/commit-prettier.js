@@ -91,7 +91,6 @@ const prettyPrint = (commitHash, groupBy, path, title = 'untitled', filters) => 
     if (path) {
         console.log('Writing changelog at: ', path);
         writeFileSync(path, file);
-        gitAddAll()
     }
 }
 

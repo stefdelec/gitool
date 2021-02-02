@@ -60,6 +60,10 @@ if (argv.prettyPrint) {
 
     const filters = argv.filters ? argv.filters.split('|') : undefined;
     prettyPrint(commitFrom, groupBy, argv.output, title, filters);
+    if (argv.addAll) {
+        console.log('Adding files to stage');
+        shortCut.gitAddAll()
+    }
 }
 
 if (argv.messageComposer) {
