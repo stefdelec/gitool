@@ -13,6 +13,7 @@ const argv = require('yargs')
     .alias('t', 'test')
     .alias('l', 'last')
     .alias('g', 'groupBy')
+    .alias('bu','bump')
     .argv
 
 const { prettyPrint, write } = require('./src/commit-prettier/commit-prettier');
@@ -42,7 +43,9 @@ if (argv.checkCommit) {
     }
 
 }
-
+if(argv.bump){
+    console.log(argv.bump);
+}
 if (argv.prettyPrint) {
     const groupBy = argv.groupBy === 'scope' ? 'scope' : 'type';
 

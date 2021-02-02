@@ -89,7 +89,7 @@ const prettyPrint = (commitHash, groupBy, path, title = 'untitled', filters) => 
     eval(consoleLogs);
 
     if (path) {
-        console.log('Writing release not at: ', path);
+        console.log('Writing changelog at: ', path);
         writeFileSync(path, file);
     }
 }
