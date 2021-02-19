@@ -82,3 +82,8 @@ if (argv.messageComposer) {
         messageComposer(isTest, false);
     }
 }
+
+if(argv.cane){
+    shortCut.ex('git add .')
+    shortCut.ex('git commit --amend --no-edit')
+}

@@ -63,3 +63,10 @@ and
 
 
 ![alt text](https://raw.githubusercontent.com/stefdelec/gitool/master/readme/messagecomposer.png)
+
+
+## cane
+shortcut for
+```
+git add . && git commit --amend --no-edit
+```
