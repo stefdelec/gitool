@@ -50,7 +50,7 @@ Output a file:
 
 Add this in your package.json
 ```
-    "prepublish": "gitool -pao=changelog.md --tag=1
+    "prepublish": "npm test && npm version minor && node index.js -pao=changelog.md --tag=1 && git push"
 ```
 ## message composer
 

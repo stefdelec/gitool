@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "prepublish": "npm test && node index.js -pao=changelog.md --tag=1",
-    "postpublish": "npm version minor && git push"
+    "prepublish": "npm test && npm version minor && node index.js -pao=changelog.md --tag=1 && git push"
   },
   "bin": {
     "gitool": "index.js",

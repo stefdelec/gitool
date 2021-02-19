@@ -52,10 +52,9 @@ if (argv.prettyPrint) {
 
     const groupBy = argv.groupBy === 'scope' ? 'scope' : 'type';
 
-    const firstCommitAllTime = shortCut.firstCommitAllTime().trim()
     const tags = shortCut.getTagsOrderedByDate().split('\n').reverse();
 
-    const numOftag=parseInt(argv.tag>tags.length?tags.length-1 : argv.tag);
+    const numOftag=parseInt(argv.tag);
 
     const getFromTag = (tagNumber) => tags[+tagNumber];
 
@@ -68,7 +67,7 @@ if (argv.prettyPrint) {
     if (argv.addAll) {
         console.log('Adding files to stage');
         shortCut.ex('git add .')
-        shortCut.ex('git commit -am "docs: changelog"');
+        shortCut.ex('git commit --amend --no-edit')
     }
 }
 
