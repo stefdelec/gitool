@@ -48,6 +48,10 @@ Output a file:
 ```gitool -p --output=changelog.md'```
 [example of this repo here](https://github.com/stefdelec/gitool/blob/master/changelog.md)
 
+Add this in your package.json
+```
+    "prepublish": "gitool -pao=changelog.md --tag=1
+```
 ## message composer
 
 ```gitool --messageComposer --test``` to test the functionality

@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "preversion": "node index.js -pao=changelog.md --tag=1",
     "test": "jest",
-    "prepublish": "npm test",
+    "prepublish": "npm test && node index.js -pao=changelog.md --tag=1",
     "postpublish": "npm version minor && git push"
   },
   "bin": {
