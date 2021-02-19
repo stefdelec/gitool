@@ -65,7 +65,7 @@ if (argv.prettyPrint) {
     const filters = argv.filters ? argv.filters.split('|') : undefined;
     prettyPrint(commitFrom, groupBy, argv.output, title, filters);
     if (argv.addAll) {
-        console.log('Adding files to stage');
+        console.log('Adding files to previous commit');
         shortCut.ex('git add .')
         shortCut.ex('git commit --amend --no-edit')
     }
