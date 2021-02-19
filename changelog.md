@@ -1,16 +1,11 @@
 #  Release notes
 
-**version**: From v1.18.0 to v1.19.0
+**version**: From v1.20.0 to v1.21.0
 
-## **feat (2):**
- - feat(readme): improve readme
- - feat(autofetch): auto fetch tags before creating changelog
-
-## **docs (1):**
- - docs: changelog
-
-## **fix (1):**
- - fix(changelog): fix change log tag title
+## **feat (3):**
+ - feat(cane): short cut for add commit no edit
+ - feat(console): improve console log
+ - feat(readme): improve package.json bump
 
 
 
