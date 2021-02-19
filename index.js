@@ -47,6 +47,9 @@ if(argv.bump){
     console.log(argv.bump);
 }
 if (argv.prettyPrint) {
+    console.log('Fetching tags from origin');
+    shortCut.ex("git fetch origin --tags");
+
     const groupBy = argv.groupBy === 'scope' ? 'scope' : 'type';
 
     const firstCommitAllTime = shortCut.firstCommitAllTime().trim()
@@ -64,7 +67,8 @@ if (argv.prettyPrint) {
     prettyPrint(commitFrom, groupBy, argv.output, title, filters);
     if (argv.addAll) {
         console.log('Adding files to stage');
-        shortCut.gitAddAll()
+        shortCut.ex('git add .')
+        shortCut.ex('git commit -am "docs: changelog"');
     }
 }
 
@@ -78,13 +82,4 @@ if (argv.messageComposer) {
     } else {
         messageComposer(isTest, false);
     }
-}
-
-if (argv.changelog) {
-    console.log("Bumping: start");
-    console.log("Creating: changelog.md");
-
-    shortCut.ex('gitool -p --tag --output=changelog.md');
-    shortCut.ex('git add .')
-    shortCut.ex('git commit -am "docs: changelog"');
 }
