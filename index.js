@@ -14,6 +14,7 @@ const argv = require('yargs')
     .alias('l', 'last')
     .alias('g', 'groupBy')
     .alias('bu','bump')
+    .alias('b','branch')
     .argv
 
 const { prettyPrint, write } = require('./src/commit-prettier/commit-prettier');
@@ -81,6 +82,11 @@ if (argv.messageComposer) {
     } else {
         messageComposer(isTest, false);
     }
+}
+
+if(argv.force){
+    const branch=argv.branch || 'develop';
+    shortCut.ex(`git add . && git commit --amend --no-edit && git fetch && git pull origin ${branch} --rebase && git push origin HEAD --force`);
 }
 
 if(argv.cane){

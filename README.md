@@ -70,3 +70,10 @@ shortcut for
 ```
 git add . && git commit --amend --no-edit
 ```
+
+## force
+rebase on develop or branch + push force
+
+```gitool -force```
+```gitool -force -branch=master```
+```gitool -fb=master```
