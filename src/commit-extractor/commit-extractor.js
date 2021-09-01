@@ -1,5 +1,5 @@
 const commitExtractor = (commitMessage) => {
-    const reg = new RegExp(/(feat|fix|docs|style|refactor|test|chore)(\((\w{1,})\)){0,1}: (.{1,})/)
+    const reg = new RegExp(/(feat|fix|docs|style|refactor|test|chore|release)(\((\w{1,})\)){0,1}: (.{1,})/)
     const result = commitMessage.match(reg)
     if (result) {
         return {

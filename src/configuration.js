@@ -1,5 +1,5 @@
 module.exports = {
-    types: ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore'],
+    types: ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore', 'release'],
     examples: {
         feat: "feature",
         fix: "bug fix",
@@ -7,7 +7,8 @@ module.exports = {
         style: "formatting, missing semi colons",
         refactor: 'a refacto of a class',
         test: "when adding missing tests",
-        chore: "maintain"
+        chore: "maintain",
+        release: "when release",
     }
 };
 
