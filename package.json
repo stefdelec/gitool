@@ -1,11 +1,11 @@
 {
   "name": "@arianee/gitool",
-  "version": "1.22.0",
+  "version": "1.24.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "prepublishOnly": "npm test && npm version minor --no-git-tag-version && node index.js -pao=changelog.md --pn=ProjectName --v=1.23.2 && git push"
+    "postversion": "node index.js -po=changelog.md --pn=gitool --v=1.25.0"
   },
   "bin": {
     "gitool": "index.js",
