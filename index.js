@@ -3,11 +3,14 @@ const commitMessageChercher = require('./src/commit-message-checker/commit-messa
 const shortCut = require('./src/gitShortCut');
 const messageComposer = require('./src/message-composer/message-composer')
 const chalk = require('chalk');
+const { existsSync } = require('fs');
 
 const argv = require('yargs')
     .alias('c', 'checkCommit')
     .alias('o', 'output')
     .alias('p', 'prettyPrint')
+    .alias('pn','projectName')
+    .alias('v','versionTag')
     .alias('a', 'addAll')
     .alias('m', 'messageComposer')
     .alias('t', 'test')
@@ -17,7 +20,7 @@ const argv = require('yargs')
     .alias('b','branch')
     .argv
 
-const { prettyPrint, write } = require('./src/commit-prettier/commit-prettier');
+const { prettyPrint } = require('./src/commit-prettier/commit-prettier');
 // Check Last commit
 
 if (argv.checkCommit) {
@@ -40,7 +43,6 @@ if (argv.checkCommit) {
             console.log(chalk.red('commit message is NOT valid'));
             throw new Error()
         }
-        console.log('')
     }
 
 }
@@ -48,27 +50,48 @@ if(argv.bump){
     console.log(argv.bump);
 }
 if (argv.prettyPrint) {
+    if(!argv.projectName){
+        throw new Error('Project name is mandatory');
+    }
+
+    if(!argv.versionTag){
+        throw new Error('Version tag is mandatory');
+    }
     console.log('Fetching tags from origin');
     shortCut.ex("git fetch origin --tags");
 
     const groupBy = argv.groupBy === 'scope' ? 'scope' : 'type';
 
-    const tags = shortCut.getTagsOrderedByDate().split('\n').reverse();
-
-    const numOftag=parseInt(argv.tag);
+    const tags = shortCut.getTagsOrderedByDate().split('\n').filter(t => t !== '').reverse();
 
     const getFromTag = (tagNumber) => tags[+tagNumber];
 
-    const commitFrom = argv.tag ? getFromTag(numOftag) : shortCut.firstCommitAllTime().trim();
-
-    let title = `From ${getFromTag(numOftag)} to ${tags[0]}`;
+    const firstCommit =   shortCut.firstCommitAllTime().trim()
 
     const filters = argv.filters ? argv.filters.split('|') : undefined;
-    prettyPrint(commitFrom, groupBy, argv.output, title, filters);
+    const path = argv.output || './changelog.md';
+
+    const getDateOfTag = (tag) => ((shortCut.getDateTimeOfTag(tag).trim().split(' '))[0]);
+    const dateNow = (now = new Date()) => {
+        let month = now.getMonth() + 1;
+        month = month > 9 ? month : `0${month}`;
+        return `${now.getFullYear()}-${month}-${now.getDate()}`;
+    }
+
+    if(!existsSync(path)){
+        for (let i = 0; i < tags.length; i++) {
+            const date = getDateOfTag(getFromTag(i));
+            prettyPrint(i !== 0 ? getFromTag(i - 1) : firstCommit, getFromTag(i), groupBy, path, argv.projectName || 'untitled', getFromTag(i), filters, date);
+        }
+    }
+
+    prettyPrint(tags.length !== 0 ? getFromTag(tags.length - 1) : shortCut.firstCommitAllTime().trim(), 'HEAD', groupBy, path, argv.projectName || 'untitled', argv.versionTag, filters, dateNow());
+
+
     if (argv.addAll) {
         console.log('Adding files to previous commit');
         shortCut.ex('git add .')
-        shortCut.ex('git commit --amend --no-edit')
+        shortCut.ex('git commit -m "release(changelog): Update changelog.md [CI SKIP]"')
     }
 }
 
@@ -85,11 +108,11 @@ if (argv.messageComposer) {
 }
 
 if(argv.force){
-    const branch=argv.branch || 'develop';
-    shortCut.ex(`git add . && git commit --amend --no-edit && git fetch && git pull origin ${branch} --rebase && git push origin HEAD --force`);
+    const branch=argv.branch || 'master';
+    shortCut.ex(`git add . && git commit -m "release(changelog): Update changelog.md [CI SKIP]" && git fetch && git pull origin ${branch} --rebase && git push origin HEAD --force`);
 }
 
 if(argv.cane){
     shortCut.ex('git add .')
-    shortCut.ex('git commit --amend --no-edit')
+    shortCut.ex('git commit -m "release(changelog): Update changelog.md [CI SKIP]"')
 }

@@ -4,7 +4,7 @@
 # gitool
 
 Gitool helps you always have the right format for your commit message.
-Following https://www.conventionalcommits.org/en/v1.0.0-beta.2/
+Following https://www.conventionalcommits.org/en/v1.0.0/
 
 ## alias
 any gitool command can be called with ```gitool``` or ```gt```
@@ -24,22 +24,20 @@ or ```gitool -cl=3```
 
 ## pretty print
 
-```gitool --prettyPrint```
-```gitool -p``` (groupBy type by default)
+```gitool --prettyPrint --pn=ProjectName --v=1.23.2```
+```gitool -p  --pn=ProjectName --v=1.23.2``` (groupBy type by default)
 
-```gitool -p groupBy='type'```
+```gitool -p groupBy='type'  --pn=ProjectName --v=1.23.2```
 
-```gitool -pg='type'```
-```gitool -pg='scope'```
+```gitool -pg='type'  --pn=ProjectName --v=1.23.2```
+```gitool -pg='scope'  --pn=ProjectName --v=1.23.2```
 
-```gitool -pg='scope' --tag=3```
-
-```gitool -pg='type' --tag=3 --filters='feat|fix'```
+```gitool -pg='type' --filters='feat|fix' --pn=ProjectName --v=1.23.2```
 
 
 ![alt text](https://raw.githubusercontent.com/stefdelec/gitool/master/readme/commitprettier.png)
 
-```gitool -p --tag``` output commits from last tag
+```gitool -p --pn=ProjectName --v=1.23.2``` output commits from last tag
 
 Output a file:
 
@@ -50,7 +48,7 @@ Output a file:
 
 Add this in your package.json
 ```
-    "prepublish": "npm test && npm version minor && node index.js -pao=changelog.md --tag=1 && git push"
+    "postversion": "gitool -p --pn=ProjectName --v=1.23.2"
 ```
 ## message composer
 
@@ -68,12 +66,12 @@ and
 ## cane
 shortcut for
 ```
-git add . && git commit --amend --no-edit
+git add . && git commit -m "release(changelog): Update changelog.md [CI SKIP]"
 ```
 
 ## force
-rebase on develop or branch + push force
+rebase on master or branch + push force
 
 ```gitool -force```
-```gitool -force -branch=master```
-```gitool -fb=master```
+```gitool -force -branch=develop```
+```gitool -fb=develop```

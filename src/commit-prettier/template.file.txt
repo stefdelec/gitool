@@ -1,17 +1,9 @@
-#  Release notes
-
-**version**: {{title}}
+## v{{versionTag}} ( {{date}} )
 
 {{#sections}}
-## **{{name}} ({{length}}):**
+### **{{name}} ({{length}}):**
 {{#content}}
  - {{.}}
 {{/content}}
 
 {{/sections}}
-
-
-
-
-
-
