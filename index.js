@@ -62,7 +62,7 @@ if (argv.prettyPrint) {
 
     const groupBy = argv.groupBy === 'scope' ? 'scope' : 'type';
 
-    const tags = shortCut.getTagsOrderedByDate().split('\n').filter(t => t !== '').reverse();
+    const tags = shortCut.getTagsOrderedByDate().split('\n').filter(t => t !== '');
 
     const getFromTag = (tagNumber) => tags[+tagNumber];
 
