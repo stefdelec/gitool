@@ -1,8 +1,8 @@
-const { allCommitSince ,gitAddAll } = require('../gitShortCut');
+const { commitBetweenTags } = require('../gitShortCut');
 const { types } = require('../configuration');
 const { commitExtractor } = require('../commit-extractor/commit-extractor');
 const Mustache = require('mustache');
-const { readFileSync, writeFileSync } = require("fs");
+const { readFileSync, writeFileSync, existsSync } = require("fs");
 
 const addToAcc = (acc, commitType, value, filters) => {
     const shouldAdd=!filters || filters.length === 0 || filters.includes(commitType);
@@ -49,8 +49,8 @@ const groupByType = (commitLogs, filters) => {
     }, {})
 
 }
-const groupCommits = (commitHash, groupBy,filters) => {
-    const commitsLog = allCommitSince(commitHash);
+const groupCommits = (from, to, groupBy,filters) => {
+    const commitsLog = commitBetweenTags(from, to);
 
     let groupedCommit
     if (groupBy === 'type') {
@@ -69,28 +69,39 @@ const write = (view) => {
     eval(output);
 
 }
-const prettyPrint = (commitHash, groupBy, path, title = 'untitled', filters) => {
-    const groupedCommit = groupCommits(commitHash, groupBy, filters);
+
+const prettyPrint = (from, to, groupBy, path, projectName, versionTag, filters, date) => {
+    const groupedCommit = groupCommits(from, to, groupBy, filters);
 
     const data =
     {
-        title,
+        projectName,
+        versionTag: versionTag.replace('v', ''),
+        date,
         sections: Object.keys(groupedCommit).map(key => groupedCommit[key])
     }
 
     const template = readFileSync(__dirname + '/template.terminal.txt').toString();
+    const titleTemplate = readFileSync(__dirname + '/template.title.txt').toString();
     const fileTemplate = readFileSync(__dirname + '/template.file.txt').toString();
 
 
     const consoleLogs = Mustache.render(template, data);
-
-    const file = Mustache.render(fileTemplate, data);
+    const title = Mustache.render(titleTemplate, data);
+    const changelog = Mustache.render(fileTemplate, data);
 
     eval(consoleLogs);
 
     if (path) {
-        console.log('Writing changelog at: ', path);
-        writeFileSync(path, file);
+        if (existsSync(path)) { // file exists
+            console.log('Writing changelog at: ', path);
+            const data = readFileSync(path, { encoding:'utf8' });
+            const newdata = data.replace(title, title + changelog);
+            writeFileSync(path, newdata);
+        } else { // file not exists
+            console.log('Generating and writing changelog at: ', path);
+            writeFileSync(path, title + changelog);
+        }
     }
 }
 

@@ -10,6 +10,7 @@ describe('commit message checker', () => {
             'chore: zefe',
             '2.0.1',
             '02.02.001',
+            'release(changelog): Update changelog.md [CI SKIP]',
         ]
 
     acceptedCommit.forEach(commitMessage => {

@@ -1,13 +1,15 @@
 var chalk = require('chalk');
 
-console.log(chalk.bold.blue('version: {{title}}'));
+console.log(chalk.bold.blue('### {{projectName}} ###'));
+console.log('');
+console.log(chalk.bold.blue('version: v{{versionTag}}'));
 console.log('')
 {{#sections}}
 console.log(chalk.green('##########################'))
 console.log(chalk.bold.green('### {{name}} ({{length}})'))
 console.log(chalk.green('##########################'))
 {{#content}}
-console.log(chalk.blue('{{.}}')) 
+console.log(chalk.blue('{{.}}'))
 {{/content}}
 console.log('')
 

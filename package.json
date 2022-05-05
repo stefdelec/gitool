@@ -1,11 +1,11 @@
 {
-  "name": "gitool",
-  "version": "1.22.0",
+  "name": "@arianee/gitool",
+  "version": "1.24.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "prepublish": "npm test && npm version minor && node index.js -pao=changelog.md --tag=1 && git push"
+    "postversion": "node index.js -po=changelog.md --pn=gitool --v=1.25.0"
   },
   "bin": {
     "gitool": "index.js",
@@ -13,9 +13,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/stefdelec/gitool"
+    "url": "https://github.com/Arianee/gitool"
   },
   "access": "public",
+  "private": false,
   "keywords": [],
   "author": "",
   "license": "ISC",
