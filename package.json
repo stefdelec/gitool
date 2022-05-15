@@ -21,7 +21,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^3.0.0",
+    "chalk": "^4.0.0",
     "jest": "^24.9.0",
     "moustache": "0.0.4",
     "mustache": "^3.1.0",
