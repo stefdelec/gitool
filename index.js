@@ -15,7 +15,7 @@ const argv = require('yargs')
     .alias('g', 'groupBy')
     .alias('bu', 'bump')
     .alias('b', 'branch')
-    .alias('re', 'rePrepare')
+    .alias('f', 'force')
     .argv
 
 const { prettyPrint, write } = require('./src/commit-prettier/commit-prettier');
