@@ -86,7 +86,7 @@ if (argv.messageComposer) {
 }
 
 if (argv.force) {
-    const branch = argv.branch || 'develop';
+    const branch = argv.branch || 'main';
     shortCut.ex('git add .', true)
     shortCut.ex('git commit --amend --no-edit', true);
     shortCut.ex('git fetch ', true);
