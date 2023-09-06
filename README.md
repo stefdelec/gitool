@@ -71,6 +71,12 @@ shortcut for
 git add . && git commit --amend --no-edit
 ```
 
+## rePrepare
+shortcut for 
+git add . && git commit --amend --no-edit
++ rebase on main
++ push
+
 ## force
 rebase on develop or branch + push force
 

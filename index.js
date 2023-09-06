@@ -13,8 +13,9 @@ const argv = require('yargs')
     .alias('t', 'test')
     .alias('l', 'last')
     .alias('g', 'groupBy')
-    .alias('bu','bump')
-    .alias('b','branch')
+    .alias('bu', 'bump')
+    .alias('b', 'branch')
+    .alias('re', 'rePrepare')
     .argv
 
 const { prettyPrint, write } = require('./src/commit-prettier/commit-prettier');
@@ -44,7 +45,7 @@ if (argv.checkCommit) {
     }
 
 }
-if(argv.bump){
+if (argv.bump) {
     console.log(argv.bump);
 }
 if (argv.prettyPrint) {
@@ -55,7 +56,7 @@ if (argv.prettyPrint) {
 
     const tags = shortCut.getTagsOrderedByDate().split('\n').reverse();
 
-    const numOftag=parseInt(argv.tag);
+    const numOftag = parseInt(argv.tag);
 
     const getFromTag = (tagNumber) => tags[+tagNumber];
 
@@ -84,12 +85,16 @@ if (argv.messageComposer) {
     }
 }
 
-if(argv.force){
-    const branch=argv.branch || 'develop';
-    shortCut.ex(`git add . && git commit --amend --no-edit && git fetch && git pull origin ${branch} --rebase && git push origin HEAD --force`);
+if (argv.force) {
+    const branch = argv.branch || 'develop';
+    shortCut.ex('git add .', true)
+    shortCut.ex('git commit --amend --no-edit', true);
+    shortCut.ex('git fetch ', true);
+    shortCut.ex(`git pull origin ${branch} --rebase`, true);
+    shortCut.ex('git push origin HEAD --force', true);
 }
 
-if(argv.cane){
-    shortCut.ex('git add .')
-    shortCut.ex('git commit --amend --no-edit')
+if (argv.cane) {
+    shortCut.ex('git add .', true)
+    shortCut.ex('git commit --amend --no-edit', true)
 }
