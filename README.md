@@ -72,10 +72,14 @@ git add . && git commit --amend --no-edit
 ```
 
 ## rePrepare
-shortcut for 
-git add . && git commit --amend --no-edit
-+ rebase on main
-+ push
+Checkout base branch and hard reset to `origin/<branch>` (default `main`). Useful to start a new feature from a clean, up-to-date base.
+
+Usage:
+```
+gitool --rePrepare
+gitool --rePrepare --branch=develop
+gitool -reb=develop
+```
 
 ## force
 rebase on develop or branch + push force

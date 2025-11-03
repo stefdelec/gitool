@@ -98,3 +98,10 @@ if (argv.cane) {
     shortCut.ex('git add .', true)
     shortCut.ex('git commit --amend --no-edit', true)
 }
+
+if (argv.rePrepare) {
+    const branch = argv.branch || 'main';
+    shortCut.ex('git fetch origin', true);
+    shortCut.ex(`git checkout ${branch}`, true);
+    shortCut.ex(`git reset --hard origin/${branch}`, true);
+}
